@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import styles from './style.scss'
+import styles from './style.module.scss'
 
 /**
  * Helper to compare strings and return result positive or negative,
@@ -13,7 +13,16 @@ import styles from './style.scss'
  * @returns {-1|0|1}
  */
 const locSort = (a, b, col) => {
-  const ret = a[col.col].localeCompare(b[col.col])
+  var ret
+  switch (col.type) {
+    default:
+    case 'string':
+      ret = a[col.col].localeCompare(b[col.col])
+      break;
+    case 'date':
+      ret = new Date(a[col.col]) < new Date(b[col.col]) ? -1 : 1
+      break;
+  }
   return col.sens === 'asc' ? ret : -ret
 }
 locSort.propTypes = {
@@ -26,12 +35,12 @@ locSort.propTypes = {
 }
 
 /**
- * Main sort method, possible to sort on 3 columns
+ * Main multicriteria sort method, possible to sort on 3 columns
  *
  * @param {object} col1 object containinig colName & sort order
  * @param {object} col2
  * @param {object} col3
- * @param {object} a
+ * @param {object} a a&b, values to compare
  * @param {object} b
  */
 const sortData = (col1, col2, col3, a, b) => {
@@ -96,9 +105,9 @@ export const DataTable = ({ formatCols, data, curPage, nbPerPage }) => {
    * unused sort cols must be filled with null in sortColumn
    */
   const [sortColumn, setSortColumn] = useState([
-    { col: null, sens: 'asc' },
-    { col: null, sens: 'asc' },
-    { col: null, sens: 'asc' }
+    { col: null, type: null, sens: 'asc' },
+    { col: null, type: null, sens: 'asc' },
+    { col: null, type: null, sens: 'asc' }
   ])
   const [sortIndex, setSortIndex] = useState(0)
   const [dataSorted, setDataSorted] = useState(data)
@@ -121,12 +130,14 @@ export const DataTable = ({ formatCols, data, curPage, nbPerPage }) => {
    * Reset sort columns
    *
    */
-  const resetSortColumns = (a) => {
+  const resetSortColumns = (colName, type) => {
     var temp = [...sortColumn]
+
+
     temp = [
-      { col: a, sens: 'asc' },
-      { col: null, sens: 'asc' },
-      { col: null, sens: 'asc' }
+      { col: colName, type: type, sens: 'asc' },
+      { col: null, type: null, sens: 'asc' },
+      { col: null, type: null, sens: 'asc' }
     ]
     setSortIndex(0)
     setSortColumn(temp)
@@ -134,20 +145,23 @@ export const DataTable = ({ formatCols, data, curPage, nbPerPage }) => {
   /**
    * Add a new sort column if possible (the current allocated columns
    * must be <= 2)
-   */
-  const addSortColumn = (a, shift) => {
-    var temp = [...sortColumn]
+  */
+ const addSortColumn = (a, shift) => {
+   var temp = [...sortColumn]
 
-    if (
+   // Search of type in formatCols
+   const type = searchFormat(a).type
+
+   if (
       (shift && sortIndex === 2) || // Already 3 search cols selected
       temp[0].col === null || // Or no column selected
       !shift // Or shift key not holded
     ) {
       // Then no room to have one column more, we init sortColumn and restart from zero
-      resetSortColumns(a)
+      resetSortColumns(a, type)
     } else {
       // Room to have one column more
-      temp[sortIndex + 1] = { col: a, sens: 'asc' }
+      temp[sortIndex + 1] = { col: a, type: type, sens: 'asc' }
       setSortIndex(sortIndex + 1)
       setSortColumn(temp)
     }
@@ -161,13 +175,27 @@ export const DataTable = ({ formatCols, data, curPage, nbPerPage }) => {
    */
   const searchColumn = (a) => {
     for (let i = 0; i < sortColumn.length; i++) {
-      if (sortColumn[i].col === a.value) {
+      if (sortColumn[i].col === a) {
         return i
       }
     }
     return -1
   }
 
+  /**
+   * Search in formatCols if a.value is already present
+   *
+   * @param {object} a element to test (a.value is to be tested)
+   * @returns {number} return index of array if found, -1 if not found
+   */
+  const searchFormat = (colName) => {
+    for (let i = 0; i < formatCols.length; i++) {
+      if (formatCols[i].data === colName) {
+        return formatCols[i]
+      }
+    }
+    return -1
+  }
   /**
    * This method is used to handle sort order
    *
@@ -179,9 +207,9 @@ export const DataTable = ({ formatCols, data, curPage, nbPerPage }) => {
     const a = e.currentTarget.attributes.getNamedItem('data-name')
 
     if (a) {
-      const idx = searchColumn(a)
+      const idx = searchColumn(a.value)
 
-      if (idx !== -1 && a.value === sortColumn[idx].col && e.shiftKey) {
+      if (idx !== -1 && (a.value === sortColumn[idx].col)) {
         inverSortOrderOfCurrentColumn(idx) // Column clicked twice, inverse sort order
       } else {
         addSortColumn(a.value, e.shiftKey) // Try to set/add one column
@@ -189,6 +217,24 @@ export const DataTable = ({ formatCols, data, curPage, nbPerPage }) => {
     }
   }
 
+  /**
+   * Display cell value depending of data type
+   *
+   * @param {type} type Could be 'string', 'number', 'date'
+   * @param {*} data Data to display
+   * @returns Value to dispaly in right format
+   */
+  const display = (type, data) => {
+    // console.log('type=', type, 'data=', data)
+    switch (type) {
+      case 'string':
+        return data
+      case 'date':
+        return new Date(data).toLocaleDateString('fr')
+      default:
+        return data
+    }
+  }
   /**
    * Side effect triggered when data or sort type/order change
    */
@@ -219,9 +265,7 @@ export const DataTable = ({ formatCols, data, curPage, nbPerPage }) => {
                 data-name={element.data}
                 className={cl.join(' ').trim()}
                 onClick={changeSortOrder}
-              >
-                {element.title}
-              </th>
+              >{element.title}</th>
             )
           })}
         </tr>
@@ -242,7 +286,7 @@ export const DataTable = ({ formatCols, data, curPage, nbPerPage }) => {
                       key={'td-table-key-' + index}
                       className={cl.join(' ').trim()}
                     >
-                      {ligne[element.data]}
+                      {display(element.type, ligne[element.data])}
                     </td>
                   )
                 })}
