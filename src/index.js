@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import styles from './style.module.scss'
+// eslint-disable-next-line import/no-duplicates
+import styles from './style_module.scss'
 
 /**
  * Helper to compare strings and return result positive or negative,
@@ -18,10 +19,10 @@ const locSort = (a, b, col) => {
     default:
     case 'string':
       ret = a[col.col].localeCompare(b[col.col])
-      break;
+      break
     case 'date':
       ret = new Date(a[col.col]) < new Date(b[col.col]) ? -1 : 1
-      break;
+      break
   }
   return col.sens === 'asc' ? ret : -ret
 }
