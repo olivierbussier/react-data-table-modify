@@ -10,7 +10,7 @@
 ## Live demo
 https://olivierbussier.github.io/react-data-table-modify/
 
-data for this live demo have been created using [faker](https://www.npmjs.com/package/faker)
+data for this live demo have been created using [faker](https://www.npmjs.com/package/@faker-js/faker)
 
 ## Install
 
