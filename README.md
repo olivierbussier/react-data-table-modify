@@ -10,10 +10,12 @@
 ## Live demo
 https://olivierbussier.github.io/react-data-table-modify/
 
+data for this live demo have been created using [faker](https://www.npmjs.com/package/faker)
+
 ## Install
 
 ```bash
-npm install --save react-data-table-modify
+npm install react-data-table-modify
 ```
 
 ## Usage
