@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 // eslint-disable-next-line import/no-duplicates
-import styles from './style_module.scss'
+import styles from './style.module.scss'
 
 /**
  * Helper to compare strings and return result positive or negative,
@@ -134,7 +134,6 @@ export const DataTable = ({ formatCols, data, curPage, nbPerPage }) => {
   const resetSortColumns = (colName, type) => {
     var temp = [...sortColumn]
 
-
     temp = [
       { col: colName, type: type, sens: 'asc' },
       { col: null, type: null, sens: 'asc' },
@@ -146,14 +145,14 @@ export const DataTable = ({ formatCols, data, curPage, nbPerPage }) => {
   /**
    * Add a new sort column if possible (the current allocated columns
    * must be <= 2)
-  */
- const addSortColumn = (a, shift) => {
-   var temp = [...sortColumn]
+   */
+  const addSortColumn = (a, shift) => {
+    var temp = [...sortColumn]
 
-   // Search of type in formatCols
-   const type = searchFormat(a).type
+    // Search of type in formatCols
+    const type = searchFormat(a).type
 
-   if (
+    if (
       (shift && sortIndex === 2) || // Already 3 search cols selected
       temp[0].col === null || // Or no column selected
       !shift // Or shift key not holded
@@ -210,7 +209,7 @@ export const DataTable = ({ formatCols, data, curPage, nbPerPage }) => {
     if (a) {
       const idx = searchColumn(a.value)
 
-      if (idx !== -1 && (a.value === sortColumn[idx].col)) {
+      if (idx !== -1 && a.value === sortColumn[idx].col) {
         inverSortOrderOfCurrentColumn(idx) // Column clicked twice, inverse sort order
       } else {
         addSortColumn(a.value, e.shiftKey) // Try to set/add one column
@@ -266,7 +265,9 @@ export const DataTable = ({ formatCols, data, curPage, nbPerPage }) => {
                 data-name={element.data}
                 className={cl.join(' ').trim()}
                 onClick={changeSortOrder}
-              >{element.title}</th>
+              >
+                {element.title}
+              </th>
             )
           })}
         </tr>
