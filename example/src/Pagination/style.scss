@@ -1,30 +1,30 @@
 .app-pagination {
-    margin-top: 1em;
-    text-align: center;
+  margin-top: 1em;
+  text-align: center;
 }
 .active {
-    background-color: #5999da;
-    border-width: 1px;
-    &:hover {
-        background-color: darken(#5999da,10%);
-    }
+  background-color: #5999da;
+  border-width: 1px;
+  &:hover {
+    background-color: darken(#5999da, 10%);
+  }
 }
 
 button {
-    width: 48px;
-    height: 48px;
-    border-radius: 5px;
-    border: 1px lightgray solid;
-    &.left-btn {
-        border-radius: 5px 0 0 5px;
-    }
-    &.middle-btn {
-        border-radius: 0;
-    }
-    &.right-btn {
-        border-radius: 0 5px 5px 0;
-    }
-    &:hover {
-        background-color: #ddd;
-    }
+  width: 48px;
+  height: 48px;
+  border-radius: 5px;
+  border: 1px lightgray solid;
+  &.left-btn {
+    border-radius: 5px 0 0 5px;
+  }
+  &.middle-btn {
+    border-radius: 0;
+  }
+  &.right-btn {
+    border-radius: 0 5px 5px 0;
+  }
+  &:hover {
+    background-color: #ddd;
+  }
 }
