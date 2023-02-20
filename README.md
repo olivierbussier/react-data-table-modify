@@ -4,6 +4,10 @@
 
 [![NPM](https://img.shields.io/npm/v/react-data-table-modify)](https://www.npmjs.com/package/react-data-table-modify) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+## :mag_right: Preview
+![image](https://raw.githubusercontent.com/olivierbussier/react-data-table-modify/main/image-doc/data-table.png)
+
+
 ## Install
 
 ```bash
