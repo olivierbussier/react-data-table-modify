@@ -2,6 +2,15 @@
 
 > DataTable custom
 
+A simple-to-use React table library with interessting features
+- Capability to be configured to display arrays of objects with simple columns configuration
+- Multi-criterias sort, including typechecking (dates, numbers é& strings).
+- Locale display
+
+Short term evolution plan
+- add cell editing (2.0)
+- 
+
 [![NPM](https://img.shields.io/npm/v/react-data-table-modify)](https://www.npmjs.com/package/react-data-table-modify) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## :mag_right: Preview
