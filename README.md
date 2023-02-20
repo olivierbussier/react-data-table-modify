@@ -7,6 +7,8 @@
 ## :mag_right: Preview
 ![image](https://raw.githubusercontent.com/olivierbussier/react-data-table-modify/main/image-doc/data-table.png)
 
+## Live demo
+https://olivierbussier.github.io/react-data-table-modify/
 
 ## Install
 
