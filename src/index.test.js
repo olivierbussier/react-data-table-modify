@@ -1,7 +1,7 @@
-import { ExampleComponent } from '.'
+import { DataTable } from '.'
 
 describe('ExampleComponent', () => {
   it('is truthy', () => {
-    expect(ExampleComponent).toBeTruthy()
+    expect(DataTable).toBeTruthy()
   })
 })
