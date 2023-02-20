@@ -75,7 +75,7 @@ DataTable has capabilities of pagination in combination with a Pagination compon
 The props used to doing that are :
 
 - nbPerPage : Number of items to display
-- curPage   : Number of page you want to display (0 to n)
+- curPage   : The page you want to display (0 to n)
 
 You could maintain a state variable for curPage in your App (with your pagination component) and pass this variable as props to DataTable
 
