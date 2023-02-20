@@ -93,6 +93,8 @@ Datatable is able to sort data with 3 colums, ascending/descending
 - If you maintain 'shift key' when you click on header cols, you will preserve previous sort choices (max 3)
 - If you have already 3 sort cols selected and you click with shift key pressed, then you erase previous sort choices
 
+Columns are sorted depending of their types, meaning that dates are sorted correctly
+
 ## License
 
 MIT © [olivierbussier](https://github.com/olivierbussier)
