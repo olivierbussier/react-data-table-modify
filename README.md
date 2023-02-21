@@ -9,7 +9,7 @@ A simple-to-use React table library with interessting features
 
 Short term evolution plan
 - add cell editing (2.0)
-  
+
 
 [![NPM](https://img.shields.io/npm/v/react-data-table-modify)](https://www.npmjs.com/package/react-data-table-modify) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -33,7 +33,6 @@ npm install react-data-table-modify
 import React, { Component } from 'react'
 
 import {Datatable} from 'react-data-table-modify'
-import 'react-data-table-modify/dist/index.css'
 
 const App = () => {
 

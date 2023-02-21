@@ -249,14 +249,14 @@ export const DataTable = ({ formatCols, data, curPage, nbPerPage }) => {
   }, [sortColumn, data])
 
   return (
-    <table className={styles.dataTable} role='grid'>
+    <table className="dataTable" role='grid'>
       <thead>
         <tr>
           {formatCols.map((element, index) => {
             // Check if col is in sort columns
             const cl = sortColumn.map((col, idx) => {
               return col.col === element.data
-                ? styles[col.sens] + ' ' + styles['sort-col-' + idx]
+                ? col.sens + ' sort-col-' + idx
                 : ''
             })
             return (
@@ -276,11 +276,11 @@ export const DataTable = ({ formatCols, data, curPage, nbPerPage }) => {
         {dataSorted.length ? (
           dataSorted.map((ligne, iLigne) =>
             iLigne >= indexStart && iLigne < indexEnd ? (
-              <tr className={styles.tbodyTr} key={'tr-table-key-' + iLigne}>
+              <tr key={'tr-table-key-' + iLigne}>
                 {formatCols.map((element, index) => {
                   const cl = sortColumn.map((col, idx) => {
                     return col.col === element.data
-                      ? styles[col.sens] + ' ' + styles['sort-col-' + idx]
+                      ? col.sens + ' sort-col-' + idx
                       : ''
                   })
                   return (
