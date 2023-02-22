@@ -86,7 +86,8 @@ And finally, for these data, you will use DataTable this way
 ```
 
 ### Pagination
-DataTable has capabilities of pagination in combination with a Pagination component (display pages). In this case, you could send to Datatable component whole data and specify by props which part of these data you want to display
+
+DataTable comes with a Pagination companion component. In this case, you could send to Datatable component whole data and specify by props which part of these data you want to display
 
 The props used to doing that are :
 
@@ -94,6 +95,41 @@ The props used to doing that are :
 - curPage   : The page you want to display (0 to n)
 
 You could maintain a state variable for curPage in your App (with your pagination component) and pass this variable as props to DataTable
+
+## Usage of DataTable with Pagination component
+
+At least, you have to declare state variables:
+- First one to maintain the value of the current page.
+- Second one for the number of items per page if you want this to be dynammicly changed
+
+```jsx
+
+import {DataTable, Pagination} from 'react-data-table-modify'
+
+const App = () => {
+  const nbPerPage = 10
+  const [curPage, setCurPage] = useState(0)
+
+  data = ...fetch / Array...
+
+  return (
+    <div>
+      <DataTable
+        formatCols={formatCols}
+        data={data}
+        curPage={curPage}
+        nbPerPage={nbPerPage}
+      />
+      <Pagination
+        nbItems={data.length}
+        nbPerPage={nbPerPage}
+        curPage={curPage}
+        onPageChange={(page) => setCurPage(page)}
+      />
+    </div>
+  )
+}
+```
 
 ## Sorting capabilities
 Datatable is able to sort data with 3 colums, ascending/descending

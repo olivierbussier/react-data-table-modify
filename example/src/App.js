@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 
-import { DataTable } from 'react-data-table-modify'
+import { DataTable, Pagination } from 'react-data-table-modify'
 
 import { data } from './data.jsx'
-import { Pagination } from './Pagination'
 
 const formatCols = [
   { title: 'First Name', data: 'firstName', type: 'string' },
