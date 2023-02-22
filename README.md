@@ -139,6 +139,93 @@ Datatable is able to sort data with 3 colums, ascending/descending
 
 Columns are sorted depending of their types, meaning that dates are sorted correctly
 
+## CSS Structure
+
+Display of DataTable component could be customised easily using css overriding, hereafter the structure of scss in place
+
+```scss
+.data-table {
+    // Container of whole DataTable component
+    th {
+        position: relative;  // Origin of children's absolute
+        background-image: url(/* Caret up&down*/);
+        &.asc {
+            background-image: url(/* caret up */);
+        }
+        &.desc {
+            background-image: url(/* caret dpwn */);
+        }
+        &.sort-col-0 {
+            &:after {
+                position: absolute;
+                content: '1';
+            }
+        }
+        &.sort-col-1 {
+            &:after {
+                position: absolute;
+                content: '2';
+            }
+        }
+        &.sort-col-2 {
+            &:after {
+                position: absolute;
+                content: '3';
+            }
+        }
+    }
+    tbody tr {
+        background: white;
+        &:nth-child(2n+1) {
+            background-color: /* color of odd rows */
+        }
+    }
+    tr:nth-child(2n+1) {
+        .sort-col-0, .sort-col-1, .sort-col-2 {
+            background-color: /* color of odd rows */
+        }
+    }
+    tr:nth-child(2n+2) {
+        .sort-col-0, .sort-col-1, .sort-col-2 {
+            background-color: /* color of even rows
+        }
+    }
+
+}
+
+```
+
+And for Pagination component
+
+```scss
+.app-pagination {
+    // Container of whole Pagination component
+    .active {
+        // Active button
+        &:hover {
+          // Active button hovered
+        }
+    }
+
+    button {
+      // Buttons
+        &.left-btn {
+            //Left Button
+        }
+        &.middle-btn {
+            // Middle Buttons (other than left & right)
+        }
+        &.right-btn {
+            //Right Button
+        }
+        &:hover {
+          // Hovered Buttons
+        }
+    }
+}
+```
+
+
 ## License
 
 MIT © [olivierbussier](https://github.com/olivierbussier)
