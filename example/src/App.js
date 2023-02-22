@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import { DataTable } from 'react-data-table-modify'
-import 'react-data-table-modify/dist/index.css'
+
 import { data } from './data.jsx'
 import { Pagination } from './Pagination'
 
