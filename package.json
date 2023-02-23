@@ -1,6 +1,6 @@
 {
   "name": "react-data-table-modify",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "React DataTable with enhanced capabilities to replace jQuery datatable",
   "author": "olivierbussier",
   "license": "MIT",
